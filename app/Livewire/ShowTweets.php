@@ -9,6 +9,10 @@ class ShowTweets extends Component
 {
     public string $content = '';
 
+    protected $rules = [
+        'content' => 'required|string|min:2|max:255',
+    ];
+
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
         $tweets = Tweet::with('user')->get();
@@ -23,6 +27,8 @@ class ShowTweets extends Component
 
     public function tweet(): void
     {
+        $this->validate();
+
         $tweet = new Tweet();
 
         $tweet->content = $this->content;

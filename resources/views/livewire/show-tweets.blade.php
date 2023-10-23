@@ -5,6 +5,10 @@
         <label for="content">Tweet something!</label>
         <input type="text" name="content" id="content" wire:model="content">
 
+        @error('content')
+            <span>{{ $message }}</span>
+        @enderror
+
         <button type="submit">
             Tweet!
         </button>
