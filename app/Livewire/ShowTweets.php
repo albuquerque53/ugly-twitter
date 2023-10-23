@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use App\Models\Tweet;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowTweets extends Component
 {
+    use WithPagination;
+
     public string $content = '';
 
     protected $rules = [
@@ -15,7 +18,7 @@ class ShowTweets extends Component
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
-        $tweets = Tweet::with('user')->get();
+        $tweets = Tweet::with('user')->paginate(2);
 
         return view(
             view: 'livewire.show-tweets',
