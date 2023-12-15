@@ -12,7 +12,7 @@ class ShowTweets extends Component
 
     public string $content = '';
 
-    protected $rules = [
+    protected array $rules = [
         'content' => 'required|string|min:2|max:255',
     ];
 
@@ -39,6 +39,11 @@ class ShowTweets extends Component
 
         $tweet->save();
 
+        $this->resetFields();
+    }
+
+    private function resetFields(): void
+    {
         $this->content = '';
     }
 }
