@@ -15,7 +15,15 @@
     </form>
 
     @foreach($tweets as $tweet)
-        <p>{{ $tweet->user->name }} - {{ $tweet->content }} ({{ $tweet->created_at }})</p>
+        <p>
+            {{ $tweet->user->name }} - {{ $tweet->content }} ({{ $tweet->created_at }})
+
+            @if ($tweet->hasLike())
+                <a href="#" wire:click="unlikeTweet({{ $tweet }})">Unlike</a>
+            @else
+                <a href="#" wire:click="likeTweet({{ $tweet }})">Like</a>
+            @endif
+        </p>
     @endforeach
 
     <hr>

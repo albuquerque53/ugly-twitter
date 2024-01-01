@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Like;
 use App\Models\Tweet;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -42,6 +43,26 @@ class ShowTweets extends Component
         $tweet->save();
 
         $this->resetFields();
+    }
+
+    public function likeTweet(Tweet $tweet): void
+    {
+        $like = new Like;
+
+        $like->tweet_id = $tweet->id;
+        $like->user_id = auth()->user()->id;
+
+        $like->save();
+    }
+
+    public function unlikeTweet(Tweet $tweet): void
+    {
+        Like::query()
+            ->where([
+                'tweet_id' => $tweet->id,
+                'user_id' => auth()->user()->id,
+            ])
+            ->delete();
     }
 
     private function resetFields(): void
