@@ -47,6 +47,10 @@ class ShowTweets extends Component
 
     public function likeTweet(Tweet $tweet): void
     {
+        if ($tweet->hasLike()) {
+            return;
+        }
+
         $like = new Like;
 
         $like->tweet_id = $tweet->id;
@@ -57,6 +61,10 @@ class ShowTweets extends Component
 
     public function unlikeTweet(Tweet $tweet): void
     {
+        if (! $tweet->hasLike()) {
+            return;
+        }
+
         Like::query()
             ->where([
                 'tweet_id' => $tweet->id,
