@@ -35,7 +35,7 @@ class ShowTweets extends Component
         $tweet = new Tweet();
 
         $tweet->content = $this->content;
-        $tweet->user_id = 1;
+        $tweet->user_id = auth()->user()->id;
 
         $tweet->save();
 
