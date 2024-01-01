@@ -18,7 +18,9 @@ class ShowTweets extends Component
 
     public function render(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
     {
-        $tweets = Tweet::with('user')->paginate(2);
+        $tweets = Tweet::with('user')
+            ->latest()
+            ->paginate(10);
 
         return view(
             view: 'livewire.show-tweets',
