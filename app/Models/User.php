@@ -28,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path',
     ];
 
     /**
@@ -68,5 +69,10 @@ class User extends Authenticatable
     public function likes(): HasMany
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function getProfilePhotoAttribute(): ?string
+    {
+        return $this->profile_photo_path;
     }
 }
